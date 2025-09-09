@@ -6,3 +6,6 @@ python-socketio==5.8.0
 Werkzeug==2.3.7  # WSGI web server utility
 gunicorn==21.2.0  # Production WSGI server (for deployment)
 python-dotenv==1.0.0  # For environment variables
+setuptools==68.2.2  # This provides distutils
+gevent==23.9.1  # Alternative to eventlet
+gevent-websocket==0.10.1
