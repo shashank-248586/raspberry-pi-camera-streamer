@@ -47,13 +47,8 @@ class CameraStream {
         };
         
         this.ws.onmessage = (event) => {
-            try {
-                const data = JSON.parse(event.data);
-                this.displayFrame(data);
-            } catch (error) {
-                console.error('Error parsing WebSocket message:', error);
-            }
-        };
+    this.displayFrame(event.data);
+};
         
         this.ws.onerror = (error) => {
             console.error('WebSocket error:', error);
@@ -81,10 +76,10 @@ class CameraStream {
         }
     }
     
-    displayFrame(data) {
-        // Update the image source with the frame data
-        this.cameraFeed.src = data.image;
-    }
+    displayFrame(base64Image) {
+    // Update the image source with the base64 frame
+    this.cameraFeed.src = 'data:image/jpeg;base64,' + base64Image;
+}
     
     captureImage() {
         if (!this.isStreaming) {
