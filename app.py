@@ -1,14 +1,12 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 import base64
-import io
-from PIL import Image
-import eventlet
-eventlet.monkey_patch()
+from gevent import monkey
+monkey.patch_all()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key_here'
-socketio = SocketIO(app, async_mode='eventlet', cors_allowed_origins="*")
+socketio = SocketIO(app, async_mode='gevent', cors_allowed_origins="*")
 
 # Store connected clients
 clients = []
@@ -25,7 +23,8 @@ def handle_connect():
 
 @socketio.on('disconnect')
 def handle_disconnect():
-    clients.remove(request.sid)
+    if request.sid in clients:
+        clients.remove(request.sid)
     print(f'Client disconnected: {request.sid}')
 
 @socketio.on('video_frame')
