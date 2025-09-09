@@ -2,3 +2,7 @@ Flask==2.3.3
 Flask-SocketIO==5.3.6
 eventlet==0.33.3
 pillow
+python-socketio==5.8.0
+Werkzeug==2.3.7  # WSGI web server utility
+gunicorn==21.2.0  # Production WSGI server (for deployment)
+python-dotenv==1.0.0  # For environment variables
